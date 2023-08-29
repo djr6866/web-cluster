@@ -46,28 +46,26 @@ const submitnext = async (id: number) => {
     <el-button size="small" plain disabled>发送请求</el-button>
     <div style="margin-top: 10px">
       <el-table ref="table" :data="tableData" style="width: 100%">
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column label="Order" width="80">
+        <el-table-column fixed type="selection" width="80"> </el-table-column>
+        <el-table-column fixed label="Order" width="80">
           <template #default="scope">
             <span>{{ scope.$index + 1 }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="image" label="Image" align="center">
+        <el-table-column prop="image" label="Image" align="center" width="180">
           <template #default="scope">
-            <div v-for="(val, index) in scope.row.image" :key="index">
-              <div class="block text-center">
-                <el-carousel height="70px" :autoplay="false" indicator-position="outside">
-                  <el-carousel-item v-for="index in 4" :key="index">
-                    <el-image style="width: 70px; height: 70px" :src="val" alt=""></el-image>
-                  </el-carousel-item>
-                </el-carousel>
-              </div>
+            <div class="block text-center">
+              <el-carousel height="70px" :autoplay="false" indicator-position="outside">
+                <el-carousel-item v-for="(val, index) in scope.row.image" :key="index">
+                  <el-image style="width: 70px; height: 70px" :src="val" alt=""></el-image>
+                </el-carousel-item>
+              </el-carousel>
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="college" label="College" />
-        <el-table-column prop="id" label="Id" />
-        <el-table-column label="Volunteer">
+        <el-table-column prop="college" label="College" width="150" />
+        <el-table-column prop="id" label="Id" width="150" />
+        <el-table-column label="Volunteer" width="150">
           <template #default="scope">
             <div v-for="(val, index) in scope.row.volunteer" :key="index">
               <div>{{ val + '\n' }}</div>
@@ -75,15 +73,10 @@ const submitnext = async (id: number) => {
           </template>
         </el-table-column>
         <el-table-column prop="gender" label="Gender" width="80" />
-        <el-table-column prop="major" label="Major" />
-        <el-table-column prop="introduction" label="Introduction">
+        <el-table-column prop="major" label="Major" width="150" />
+        <el-table-column prop="introduction" label="Introduction" width="180">
           <template #default="scope">
-            <el-tooltip
-              :content="scope.row.introduction"
-              raw-content
-              placement="top-start"
-              v-if="scope.row.introduction"
-            >
+            <el-tooltip :content="scope.row.introduction" raw-content placement="top-start" v-if="scope.row.introduction">
               <span v-if="scope.row.introduction && scope.row.introduction.length <= 10">
                 {{ scope.row.introduction }}
               </span>
@@ -95,27 +88,20 @@ const submitnext = async (id: number) => {
           </template>
         </el-table-column>
         <el-table-column prop="username" label="Name" width="80" />
-        <el-table-column label="button">
+        <el-table-column label="button" width="80">
           <template #default="scope">
             <el-button size="small" plain @click="handleCheck(scope.row.id)">通过</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="operation">
+        <el-table-column label="operation" width="120">
           <template #default="scope">
-            <el-button link type="primary" size="small" @click="submitnext(scope.row.id)"
-              >提交给下个部门</el-button
-            >
+            <el-button link type="primary" size="small" @click="submitnext(scope.row.id)">提交给下个部门</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-    <el-pagination
-      background
-      layout="prev,pager,next"
-      :total="total"
-      @current-change="currentChange"
-      class="pagination-center"
-    >
+    <el-pagination background layout="prev,pager,next" :total="total" @current-change="currentChange"
+      class="pagination-center">
     </el-pagination>
   </div>
 </template>

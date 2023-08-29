@@ -43,38 +43,36 @@ const handleError = async (rowid: string) => {
         <el-button size="small" plain disabled>发送请求</el-button>
         <div style="margin-top: 10px">
             <el-table ref="table" :data="tableData" style="width: 100%">
-                <el-table-column type="selection" width="55">
+                <el-table-column fixed type="selection" width="80">
                 </el-table-column>
-                <el-table-column label="Order" width="80">
+                <el-table-column fixed label="Order" width="80">
                     <template #default="scope">
                         <span>{{ scope.$index + 1 }}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="image" label="Image" align="center">
+                <el-table-column prop="image" label="Image" align="center" width="180">
                     <template #default="scope">
-                        <div v-for="(val, index) in scope.row.image" :key="index">
-                            <div class="block text-center">
-                                <el-carousel height="70px" :autoplay="false" indicator-position="outside">
-                                    <el-carousel-item v-for="index in 4" :key="index">
-                                        <el-image style="width: 70px; height: 70px;" :src="val" alt=""></el-image>
-                                    </el-carousel-item>
-                                </el-carousel>
-                            </div>
+                        <div class="block text-center">
+                            <el-carousel height="70px" :autoplay="false" indicator-position="outside">
+                                <el-carousel-item v-for="(val, index) in scope.row.image" :key="index">
+                                    <el-image style="width: 70px; height: 70px" :src="val" alt=""></el-image>
+                                </el-carousel-item>
+                            </el-carousel>
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="college" label="College" />
-                <el-table-column prop="id" label="Id" />
-                <el-table-column label="Volunteer">
+                <el-table-column prop="college" label="College" width="180" />
+                <el-table-column prop="id" label="Id" width="180" />
+                <el-table-column label="Volunteer" width="180">
                     <template #default="scope">
                         <div v-for="(val, index) in scope.row.volunteer" :key="index">
                             <div>{{ val + '\n' }}</div>
                         </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="gender" label="Gender" width="80" />
-                <el-table-column prop="major" label="Major" />
-                <el-table-column prop="introduction" label="Introduction">
+                <el-table-column prop="gender" label="Gender" width="180" />
+                <el-table-column prop="major" label="Major" width="180" />
+                <el-table-column prop="introduction" label="Introduction" width="180">
                     <template #default="scope">
                         <el-tooltip :content="scope.row.introduction" raw-content placement="top-start"
                             v-if="scope.row.introduction">
@@ -89,7 +87,7 @@ const handleError = async (rowid: string) => {
                     </template>
                 </el-table-column>
                 <el-table-column prop="username" label="Name" width="80" />
-                <el-table-column label="Operation">
+                <el-table-column label="Operation" width="180">
                     <template #default="scope">
                         <el-button size="small" plain @click="handleSuccess(scope.row.id)">通过</el-button>
                         <el-button size="small" plain @click="handleError(scope.row.id)">未通过</el-button>
@@ -97,8 +95,10 @@ const handleError = async (rowid: string) => {
                 </el-table-column>
             </el-table>
         </div>
-        <el-pagination background layout="prev,pager,next" :total="total" @current-change="currentChange"
-            class="pagination-center"></el-pagination>
+        <div class="paginationClass">
+            <el-pagination background layout="prev,pager,next" :total="total" @current-change="currentChange"
+                class="pagination-center"></el-pagination>
+        </div>
     </div>
 </template>
 <style scoped>
@@ -125,5 +125,11 @@ const handleError = async (rowid: string) => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.paginationClass {
+    position: fixed;
+    width: 100%;
+    text-align: center;
 }
 </style>
